@@ -57,7 +57,7 @@ const DesignerBoard: React.FC<{
     >
         <Editor
             ref={editorRef}
-            apiKey="m3zkfg08keg9n2obr4mi4uqn81y0utl31lgi3m39tr5e5ssm"
+            apiKey=""
             init={{
                 height: document.body.clientHeight - 65,
                 plugins: 'print preview importcss tinydrive searchreplace autolink autosave save directionality visualblocks visualchars fullscreen image link media codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists wordcount imagetools textpattern noneditable help charmap emoticons',
