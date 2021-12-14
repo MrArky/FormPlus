@@ -488,6 +488,7 @@ const FormPlus: React.FC<{
                         controlElement={controlElement}
                         macroControlsConfig={macroControlsConfig}
                         onValuesChange={(values) => {
+                            let iframe: any = document.getElementsByClassName("tox-edit-area__iframe"); //HTMLIFrameElement
                             if (controlElement && props.value?.controlsAttrs) {
                                 let controlsAttr: any = props.value?.controlsAttrs.find(c => c.name == values.name);
                                 if (typeof values.fieldTR === "boolean") {
@@ -509,8 +510,8 @@ const FormPlus: React.FC<{
                                     // setControlsAttrs(newControlsAttrs);
                                     if (props.onChange && typeof props.onChange === "function") {
                                         props.onChange({
-                                            html:
-                                                props.value?.html,
+                                            html: iframe[0].contentWindow.document.getElementsByTagName('body')[0].innerHTML,
+                                            // props.value?.html,
                                             controlsAttrs: newControlsAttrs
                                         });
                                     }
@@ -519,11 +520,19 @@ const FormPlus: React.FC<{
                                 // setControlsAttrs([...controlsAttrs.filter(c => c.name != values.name), { ...controlsAttr, ...values }])
                                 if (props.onChange && typeof props.onChange === "function") {
                                     props.onChange({
-                                        html:
-                                            props.value?.html,
+                                        html: iframe[0].contentWindow.document.getElementsByTagName('body')[0].innerHTML,
+                                        // props.value?.html,
                                         controlsAttrs: [...props.value?.controlsAttrs.filter(c => c.name != values.name), { ...controlsAttr, ...values }]
                                     });
                                 }
+                            }
+                        }}
+                        onControlsAttrsChange={(v) => {
+                            if (props.onChange && typeof props.onChange === "function") {
+                                props.onChange({
+                                    html: props.value?.html,
+                                    controlsAttrs: v
+                                });
                             }
                         }}
                     />
